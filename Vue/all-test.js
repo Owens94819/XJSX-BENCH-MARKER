@@ -1,4 +1,5 @@
 var v,x;
+
 /*** vue ***/
 (function() {
   var app = Vue.createApp({
@@ -10,18 +11,18 @@ var v,x;
     }
   });
   
-  v=performance.now();
+  v = performance.now();
   app.mount(vue_app)
-  v=performance.now()-v;
+  v = performance.now()-v;
 })();
 
 
 /*** XJSX **/
 (function (){
  XJSX.event.emit("data/heading", heading)
- XJSX.event.emit("data/text",text)
+ XJSX.event.emit("data/text", text)
  
- x=performance.now()
+ x = performance.now()
  XJSX.parseElement(xjsx_app);
- x=performance.now()-x;
+ x = performance.now()-x;
 })();
