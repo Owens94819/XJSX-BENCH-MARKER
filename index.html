@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xjsx>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Vue.js vs XJSX.js</title>
+
+    <script src="js/index.js"></script>
+
+    <!-- Vue.js -->
+    <script src="js/vue.global.js"></script>
+
+    <!-- XJSX.js -->
+    <script src="../xjsx.js"></script>
+  </head>
+
+  <body>
+
+    <div id="vue_app">
+      <div>
+        <h1>{{heading}} (vue)</h1>
+        <p>{{text}}</p>
+      </div>
+    </div>
+    
+    <div id="xjsx_app">
+      <div>
+        <h1>
+          <?data: "heading"?>
+          (XJSX)
+        </h1>
+        <p><?data: "text"?></p>
+      </div>
+    </div>
+
+    <div id="bench"></div>
+    
+    <!-- Project -->
+    <script src="all-test.js"></script>
+    <script>
+    var vue=`<br>vue.js: ${v}ms`
+    var xjsx=`<br>xjsx.js: ${x}ms`
+    bench.setHTML(v>=x?xjsx+vue:vue+xjsx);
+    </script>
+  </body>
+</html>
