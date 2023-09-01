@@ -1,9 +1,8 @@
-/*! XJSX v 2.1.0 - 28-08-2023  */
+/*! XJSX v 2.1.1 - 01-09-2023*  */
 
 /***
- * updated
- * fix property name convention between (_remove & removed) @core.CALLBACK_PROTOTYPE & @core._observer & @core.XJSXNodeList>append...
- * for-each eval bug fixed
+ * 
+ * 
  */
 
 (function (window,exec) {
@@ -1662,7 +1661,6 @@
       callback: function (e, node, exec) {
         try {
           e = exec("[" + e + "][0]");
-
           __core__.addEventListener("data/" + e, function (ev) {
             (node.isVisible() && !node.putChild(ev.detail)) ||
               removeEventListener("data/" + e, arguments.callee);
@@ -1913,7 +1911,6 @@
               exec(arguments[i], p.arguments[i]);
             }
 
-
             for (var i = 0; i < self.global.callback.length; i++) {
               self.global.callback[i].addChild(
                 __core__.XJSXCompiler(
@@ -1936,7 +1933,7 @@
             // self.terminate();
             return;
           }
-          if (!useDelay) {
+          if (!useDelay&&useDelay!==0) {
             if ("number" === typeof data) {
               for (var i = 0; i < data; i++) {
                 foo(i);
@@ -1954,7 +1951,15 @@
             }
           } else {
             !loop&&(loop = function (v, foo, dly, node) {
+   //"use strict";
     var self = {};
+    var _setTimeout;
+    (typeof dly!=="number")&&Number(dly);
+    if(dly<50||!dly){
+      _setTimeout=requestAnimationFrame
+    }else{
+      _setTimeout=setTimeout
+    }
     var i = 0
 
     var _keys = function (e) {
@@ -1965,16 +1970,15 @@
       return k
     }
 
-
     self.nm = function (s) {
       if (!node.isVisible) {
         return
       }
       if (i < v) {
-        if (i === 0 || !s) {
+        if (i === 0 || s!==true) {
           foo(i), i++, self.nm(true);
         } else {
-          setTimeout(self.nm, dly)
+          _setTimeout(self.nm, dly)
         }
       }
     }
@@ -1984,10 +1988,10 @@
         return
       }
       if (i < v.length) {
-        if (i === 0 || !s) {
+        if (i === 0 || s!==true) {
           foo(v[i], i), i++, self.arr(true);
         } else {
-          setTimeout(self.arr, dly)
+          _setTimeout(self.arr, dly)
         }
       }
     }
@@ -2001,10 +2005,10 @@
         }
         if (i < keys.length) {
           key = keys[i]
-          if (i === 0 || !s) {
+          if (i === 0 || s!==true) {
             foo(v[key], key), i++, loop(true);
           } else {
-            setTimeout(loop, dly)
+            _setTimeout(loop, dly)
           }
         }
       }
@@ -2012,6 +2016,7 @@
     }
     return self
   });
+           
             var lp = loop(data, foo, useDelay, self);
 
             "number" === typeof data && !lp.nm()
@@ -2036,14 +2041,14 @@
       },
       callback: function () {
 
-        var self = this;
+       // var self = this;
 
-        this.appendAllTo((self.e = document.createDocumentFragment()));
+        this.appendAllTo((this.e = document.createDocumentFragment()));
         /*  if (1 > self.d.childNodes.length) {
           return;
         }*/
 
-        self.global.callback.push(self);
+        this.global.callback.push(this);
         /*   return 
         self.global.callback.push(function () {
           self.addChild(
@@ -2065,10 +2070,10 @@
         this.disable();
       },
       callback: function () {
-        var self = this;
-        this.appendAllTo((self.e = document.createDocumentFragment()));
+     //   var self = this;
+        this.appendAllTo((this.e = document.createDocumentFragment()));
 
-        self.global.callback.push(self);
+        this.global.callback.push(this);
         /*   return 
         self.global.callback.push(function () {
           self.addChild(
@@ -2273,7 +2278,7 @@
     }
   })
 
-})(this, function () {
+})(this||self, function () {
   return (
     (!arguments[1] &&
       "string" === typeof arguments[0] && [
